@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大妍藝術｜積木數學 — 快樂培養數感與量感</title>
+<meta name="description" content="大妍藝術獨創積木數學課程，用彩色圖像數字角色與數棒積木，帶孩子輕鬆學會加減乘除、九九乘法、面積體積與分數運算。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E%F0%9F%A7%B1%3C/text%3E%3C/svg%3E">
+
+<style>
+:root {
+  --c-primary: #FF7A45;
+  --c-primary-dark: #E8622C;
+  --c-blue: #4A9FE8;
+  --c-yellow: #FFC93C;
+  --c-green: #4CC38A;
+  --c-bg: #FFFBF7;
+  --c-tint: #FFF4EC;
+  --c-card: #FFFFFF;
+  --c-text: #2D2A26;
+  --c-muted: #6B6560;
+  --c-line: #EDE6DE;
+  --radius: 16px;
+  --shadow: 0 4px 20px rgba(45, 42, 38, .07);
+  --maxw: 680px;
+}
+
+*, *::before, *::after { box-sizing: border-box; }
+body, h1, h2, h3, p, ul, figure { margin: 0; }
+ul { padding: 0; list-style: none; }
+img { display: block; max-width: 100%; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans TC",
+               "PingFang TC", "Microsoft JhengHei", sans-serif;
+  background: var(--c-bg);
+  color: var(--c-text);
+  line-height: 1.75;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -webkit-text-size-adjust: 100%;
+}
+
+.container { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+.section { padding: 64px 0; }
+.section--tint { background: var(--c-tint); }
+
+.section__eyebrow {
+  font-size: 12px; letter-spacing: .16em; font-weight: 800;
+  color: var(--c-primary); margin-bottom: 10px;
+}
+.section__title {
+  font-size: clamp(22px, 6vw, 30px);
+  font-weight: 900; line-height: 1.35; letter-spacing: -.01em;
+}
+.section__lead { margin-top: 12px; font-size: 16px; color: var(--c-muted); }
+
+.btn {
+  display: flex; align-items: center; justify-content: center;
+  width: 100%; min-height: 54px; padding: 0 24px;
+  border: 2px solid transparent; border-radius: 999px;
+  font-size: 17px; font-weight: 800; cursor: pointer;
+  transition: transform .15s, background .2s, box-shadow .2s;
+}
+.btn:active { transform: scale(.975); }
+.btn--primary {
+  background: var(--c-primary); color: #fff;
+  box-shadow: 0 6px 18px rgba(255, 122, 69, .35);
+}
+.btn--primary:hover { background: var(--c-primary-dark); }
+.btn--ghost {
+  background: rgba(255,255,255,.14); color: #fff;
+  border-color: rgba(255,255,255,.65);
+  -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+}
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+
+.media {
+  border-radius: var(--radius); overflow: hidden;
+  background: #EFE9E2; box-shadow: var(--shadow);
+}
+.media img { width: 100%; height: 100%; object-fit: cover; }
+.media--wide { aspect-ratio: 16 / 10; }
+.media--card { aspect-ratio: 4 / 3; }
+
+/* ============ 1. Hero ============ */
+.hero {
+  position: relative; min-height: 92vh; min-height: 92svh;
+  display: flex; align-items: flex-end;
+  overflow: hidden; isolation: isolate;
+}
+.hero__bg {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%;
+  object-fit: cover; background: #E8E2DA;
+}
+.hero__overlay {
+  position: absolute; inset: 0; z-index: -1;
+  background: linear-gradient(
+    180deg,
+    rgba(45,42,38,.12) 0%,
+    rgba(45,42,38,.38) 45%,
+    rgba(45,42,38,.84) 100%
+  );
+}
+.hero__content {
+  position: relative; width: 100%; max-width: var(--maxw);
+  margin: 0 auto; padding: 0 24px 44px;
+  color: #fff; text-align: center;
+}
+.hero__eyebrow {
+  font-size: 13px; letter-spacing: .18em;
+  font-weight: 800; opacity: .92;
+}
+.hero__title {
+  margin-top: 6px;
+  font-size: clamp(40px, 13vw, 68px);
+  font-weight: 900; line-height: 1.08; letter-spacing: -.02em;
+}
+.hero__sub {
+  margin-top: 16px;
+  font-size: clamp(15px, 4vw, 18px);
+  line-height: 1.7; opacity: .96;
+}
+.hero__btns { display: grid; gap: 12px; margin-top: 28px; }
+
+/* ============ 2. 家長痛點 ============ */
+.pain-list { margin-top: 28px; display: grid; gap: 12px; }
+.pain-list li {
+  position: relative;
+  padding: 16px 18px 16px 54px;
+  background: var(--c-card);
+  border-radius: 14px;
+  border-left: 4px solid #FFB4A0;
+  box-shadow: var(--shadow);
+  font-size: 16px; font-weight: 600;
+}
+.pain-list li::before {
+  content: "✕";
+  position: absolute; left: 18px; top: 17px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #FFE8E0; color: var(--c-primary-dark);
+  font-size: 12px; font-weight: 900;
+  display: grid; place-items: center;
+}
+.pain-turn {
+  margin-top: 34px; text-align: center;
+  font-size: clamp(18px, 5vw, 22px);
+  font-weight: 900; line-height: 1.65;
+  color: var(--c-primary);
+}
+
+/* ============ 3. 課程理念 ============ */
+.value-grid { margin-top: 28px; display: grid; gap: 14px; }
+.value-card {
+  background: #fff; border-radius: var(--radius);
+  padding: 22px 22px 24px;
+  box-shadow: var(--shadow);
+  border-top: 4px solid var(--c-blue);
+}
+.value-card:nth-child(2) { border-top-color: var(--c-yellow); }
+.value-card:nth-child(3) { border-top-color: var(--c-green); }
+.value-card__icon { font-size: 24px; line-height: 1; margin-bottom: 10px; }
+.value-card h3 { font-size: 18px; font-weight: 900; }
+.value-card p { margin-top: 4px; font-size: 15px; color: var(--c-muted); }
+
+/* ============ 4. 課程內容 ============ */
+.course-grid { margin-top: 28px; display: grid; gap: 18px; }
+.course-card {
+  background: #fff; border-radius: var(--radius);
+  overflow: hidden; box-shadow: var(--shadow);
+}
+.course-card__body { padding: 18px 20px 22px; }
+.course-card__body h3 { font-size: 17px; font-weight: 900; }
+.course-card__body p { margin-top: 4px; font-size: 15px; color: var(--c-muted); }
+
+/* ============ 5. 學習成果 ============ */
+.check-list { margin: 24px 0; display: grid; gap: 12px; }
+.check-list li {
+  position: relative; padding-left: 34px;
+  font-size: 16px; font-weight: 700;
+}
+.check-list li::before {
+  content: "✓";
+  position: absolute; left: 0; top: 3px;
+  width: 22px; height: 22px; border-radius: 50%;
+  background: #E4F7EE; color: #1F9D62;
+  font-size: 13px; font-weight: 900;
+  display: grid; place-items: center;
+}
+
+/* ============ 6. 報名表單 ============ */
+.form-card {
+  margin-top: 28px; background: #fff;
+  border-radius: 20px; padding: 28px 22px 32px;
+  box-shadow: var(--shadow);
+}
+.form-note { margin-top: 10px; font-size: 14px; color: var(--c-muted); }
+.field { margin-bottom: 18px; }
+.field label {
+  display: block; margin-bottom: 8px;
+  font-size: 15px; font-weight: 800;
+}
+.field label .req { color: var(--c-primary); }
+.field input,
+.field select,
+.field textarea {
+  width: 100%; min-height: 52px; padding: 14px 16px;
+  border: 2px solid var(--c-line); border-radius: 12px;
+  background: #fff; font-size: 16px;
+  transition: border-color .2s, box-shadow .2s;
+}
+.field textarea { min-height: 110px; resize: vertical; line-height: 1.6; }
+.field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='9' viewBox='0 0 14 9'%3E%3Cpath d='M1 1l6 6 6-6' fill='none' stroke='%236B6560' stroke-width='2' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 18px center;
+  padding-right: 46px;
+}
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--c-primary);
+  box-shadow: 0 0 0 4px rgba(255,122,69,.13);
+}
+.form-success {
+  display: none; margin-top: 18px; padding: 16px;
+  border-radius: 12px; background: #E4F7EE;
+  color: #14784C; font-weight: 800; text-align: center;
+}
+.form-success.is-visible { display: block; }
+
+/* ============ 7. 常見問題 ============ */
+.faq { margin-top: 24px; display: grid; gap: 12px; }
+.faq details {
+  background: #fff; border-radius: 14px;
+  box-shadow: var(--shadow); overflow: hidden;
+}
+.faq summary {
+  position: relative;
+  padding: 18px 50px 18px 20px;
+  font-size: 16px; font-weight: 800;
+  cursor: pointer; list-style: none;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary::after {
+  content: "+";
+  position: absolute; right: 20px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 22px; font-weight: 400;
+  color: var(--c-primary);
+  transition: transform .2s;
+}
+.faq details[open] summary::after { content: "−"; }
+.faq details p {
+  padding: 0 20px 20px;
+  font-size: 15px; color: var(--c-muted);
+}
+
+/* ============ 8. 頁尾 ============ */
+.footer {
+  background: #2D2A26; color: #E8E2DA;
+  padding: 52px 0 120px; text-align: center;
+}
+.footer__brand {
+  font-size: 19px; font-weight: 900; color: #fff;
+}
+.footer__contact {
+  margin-top: 22px; display: grid; gap: 10px; font-size: 15px;
+}
+.footer__contact a { display: inline-block; padding: 4px 0; }
+.footer__social {
+  margin-top: 24px;
+  display: flex; justify-content: center;
+  gap: 12px; flex-wrap: wrap;
+}
+.footer__social a {
+  padding: 10px 20px;
+  border: 1px solid rgba(255,255,255,.25);
+  border-radius: 999px;
+  font-size: 14px; font-weight: 700;
+}
+.footer__copy {
+  margin-top: 32px; font-size: 13px; opacity: .55;
+}
+
+/* ============ 9. 固定底部按鈕 ============ */
+.sticky-cta {
+  position: fixed; left: 0; right: 0; bottom: 0;
+  z-index: 50;
+  padding: 12px 20px calc(12px + env(safe-area-inset-bottom, 0px));
+  background: rgba(255,251,247,.93);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  border-top: 1px solid var(--c-line);
+  transform: translateY(115%);
+  transition: transform .3s cubic-bezier(.4,0,.2,1);
+}
+.sticky-cta.is-visible { transform: translateY(0); }
+.sticky-cta .btn { max-width: var(--maxw); margin: 0 auto; }
+
+/* ============ 進場動畫 ============ */
+.js .reveal {
+  opacity: 0; transform: translateY(18px);
+  transition: opacity .65s ease, transform .65s ease;
+}
+.js .reveal.is-in { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  .js .reveal { opacity: 1; transform: none; transition: none; }
+  .sticky-cta { transition: none; }
+}
+
+@media (min-width: 600px) {
+  .section { padding: 88px 0; }
+  .hero__btns { grid-template-columns: 1fr 1fr; }
+  .value-grid { grid-template-columns: repeat(3, 1fr); }
+  .course-grid { grid-template-columns: repeat(2, 1fr); }
+  .form-card { padding: 36px 32px 40px; }
+}
+@media (min-width: 900px) {
+  :root { --maxw: 760px; }
+}
+</style>
+</head>
+
+<body>
+
+<!-- ============================================================
+     ① HERO 主視覺
+     圖片位置：下面這行 <img class="hero__bg" ...>
+     建議檔名：images/hero.png
+     建議尺寸：1200×1600（直式）或 1600×1200（橫式）
+     說明：這是頁面最上方的大圖，會滿版鋪滿整個螢幕
+     ============================================================ -->
+<header class="hero">
+  <img class="hero__bg"
+       src="images/hero.png"
+       alt="孩子開心地玩彩色數棒積木">
+  <div class="hero__overlay"></div>
+
+  <div class="hero__content">
+    <p class="hero__eyebrow">大妍藝術獨創課程</p>
+    <h1 class="hero__title">積木數學</h1>
+    <p class="hero__sub">快樂培養數感與量感<br>讓孩子從此愛上數學</p>
+
+    <div class="hero__btns">
+      <a href="#signup" class="btn btn--primary">免費預約體驗課</a>
+      <a href="#courses" class="btn btn--ghost">了解課程內容</a>
+    </div>
+  </div>
+</header>
+
+
+<!-- ============================================================
+     2. 家長期待（無圖片）
+     ============================================================ -->
+<section class="section">
+  <div class="container reveal">
+    <h2 class="section__title">關於孩子<br>您希望領先同齡，對數學充滿自信</h2>
+
+    <ul class="pain-list">
+      <li>孩子只會數數，卻沒有真正的「數感」</li>
+      <li>九九乘法不用死背，而是真的懂怎麼算</li>
+      <li>讓數學變成遊戲，在玩樂中學習</li>
+      <li>想陪孩子學，卻找不到好玩又有效的方法</li>
+    </ul>
+
+    <p class="pain-turn">其實，孩子不是不會數學，<br>只是還沒「摸到」數學。</p>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     ③ 課程理念
+     圖片位置：下面 <figure class="media media--wide"> 裡的 <img>
+     建議檔名：images/characters.png
+     建議尺寸：1200×750（16:10）
+     說明：放你們獨創的彩色數字角色大集合
+     ============================================================ -->
+<section class="section section--tint">
+  <div class="container reveal">
+    <figure class="media media--wide">
+      <img src="images/characters.png"
+           alt="characters" loading="lazy">
+    </figure>
+
+    <h2 class="section__title" style="margin-top:30px">讓數學看得見、摸得到</h2>
+    <p class="section__lead">
+      數學不該只是紙上的符號。透過獨創的彩色圖像數字角色，
+      搭配全套數棒積木，孩子親手排列、堆疊、拆解，
+      用眼睛看、用手操作，自然建立數感與量感。
+    </p>
+
+    <div class="value-grid">
+      <div class="value-card">
+        <div class="value-card__icon">🖐️</div>
+        <h3>動手操作</h3>
+        <p>直覺式積木排列，邊玩邊理解</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card__icon">👁️</div>
+        <h3>視覺運算</h3>
+        <p>彩色圖像數字，把抽象變具體</p>
+      </div>
+      <div class="value-card">
+        <div class="value-card__icon">💡</div>
+        <h3>建立概念</h3>
+        <p>不是背答案，而是真的懂</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     4. 課程內容
+     圖片位置：共 4 張，分別在 4 個 <article> 裡
+       ③ images/course-1.png → 數與量的關係
+       ④ images/course-2.png → 數學運算
+       ⑤ images/course-3.png → 面積、體積
+       ⑥ images/course-4.png → 分數
+     建議尺寸：800×600（4:3）
+     ============================================================ -->
+<section class="section" id="courses">
+  <div class="container reveal">
+    <p class="section__eyebrow">課程內容</p>
+    <h2 class="section__title">從數序到分數<br>一步步玩出數學力</h2>
+
+    <div class="course-grid">
+
+      <!-- ③ 數序與量感 -->
+      <article class="course-card">
+        <div class="media media--card">
+          <img src="images/course-1.png"
+               alt="course" loading="lazy">
+        </div>
+        <div class="course-card__body">
+          <h3>數序與量感</h3>
+          <p>建立數字順序與數量多寡的直覺</p>
+        </div>
+      </article>
+
+      <!-- ④ 四則運算 -->
+      <article class="course-card">
+        <div class="media media--card">
+          <img src="images/course-2.png"
+               alt="course" loading="lazy">
+        </div>
+        <div class="course-card__body">
+          <h3>數學運算</h3>
+          <p>用積木堆疊與拆解，理解位值與進位</p>
+        </div>
+      </article>
+
+      <!-- ⑤ 長度、面積、體積 -->
+      <article class="course-card">
+        <div class="media media--card">
+          <img src="images/course-3.png"
+               alt="course" loading="lazy">
+        </div>
+        <div class="course-card__body">
+          <h3>長度、面積、體積</h3>
+          <p>用積木排列理解乘法</p>
+        </div>
+      </article>
+
+      <!-- ⑥ 分數 -->
+      <article class="course-card">
+        <div class="media media--card">
+          <img src="images/course-4.png"
+               alt="course" loading="lazy">
+        </div>
+        <div class="course-card__body">
+          <h3>分數</h3>
+          <p>動手排列，看見數學的空間感</p>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     5. 學習成果
+     圖片位置：共 2 張，一上一下包住打勾清單
+       ⑦ images/result-1.png → 孩子開心操作積木
+       ⑧ images/result-2.png → 親子一起玩積木
+     建議尺寸：1200×750（16:10）
+     ============================================================ -->
+<section class="section section--tint">
+  <div class="container reveal">
+    <p class="section__eyebrow">圖像數學</p>
+    <h2 class="section__title">化抽象為具象</h2>
+
+    <!-- ⑦ 成果圖（上） -->
+    <figure class="media media--wide" style="margin-top:26px">
+      <img src="images/result-1.png"
+           alt="result" loading="lazy">
+    </figure>
+
+    <ul class="check-list">
+      <li>不再害怕數學，願意主動思考</li>
+      <li>看見數字就能想像量的大小</li>
+      <li>加減乘除不再靠死背，而是真的理解</li>
+      <li>對分數、面積等抽象概念有信心</li>
+      <li>親子之間多了共同操作的樂趣</li>
+    </ul>
+
+    <!-- ⑧ 成果圖（下） -->
+    <figure class="media media--wide">
+      <img src="images/result-2.png"
+           alt="result" loading="lazy">
+    </figure>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     6. 報名表單
+     圖片位置：表單上方那張圖
+       ⑨ images/teacher.png → 老師或教室照
+     建議尺寸：1200×750（16:10）
+     ============================================================ -->
+<section class="section" id="signup">
+  <div class="container reveal">
+    <!-- ⑨ 表單上方圖片 -->
+    <figure class="media media--wide">
+      <img src="images/teacher.png"
+           alt="teacher" loading="lazy">
+    </figure>
+
+    <div class="form-card">
+      <h2 class="section__title">免費預約一堂體驗課</h2>
+      <p class="form-note">
+        讓孩子先玩，再決定。<br>
+        適合幼稚園大班～國小中年級，不需要任何基礎。
+      </p>
+
+      <form id="signupForm" action="https://formspree.io/f/xljevqlq" method="POST" novalidate style="margin-top:24px">
+        <div class="field">
+          <label for="name">家長姓名 <span class="req">*</span></label>
+          <input type="text" id="name" name="name" required autocomplete="name" placeholder="王小明">
+        </div>
+        <div class="field">
+          <label for="phone">聯絡電話 <span class="req">*</span></label>
+          <input type="tel" id="phone" name="phone" required autocomplete="tel" placeholder="0912-345-678">
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" autocomplete="email" placeholder="you@example.com">
+        </div>
+        <div class="field">
+          <label for="grade">孩子年齡／年級 <span class="req">*</span></label>
+          <select id="grade" name="grade" required>
+            <option value="">請選擇</option>
+            <option>幼稚園大班</option>
+            <option>國小一年級</option>
+            <option>國小二年級</option>
+            <option>國小三年級</option>
+            <option>國小四年級</option>
+            <option>其他</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="slot">想預約的時段</label>
+          <select id="slot" name="slot">
+            <option value="">請選擇</option>
+            <option>平日下午</option>
+            <option>平日晚上</option>
+            <option>假日上午</option>
+            <option>假日下午</option>
+            <option>都可以，請幫我安排</option>
+          </select>
+        </div>
+        <div class="field">
+          <label for="note">想問的問題</label>
+          <textarea id="note" name="note" placeholder="有任何問題都可以寫在這裡"></textarea>
+        </div>
+        <button type="submit" class="btn btn--primary">送出預約</button>
+        <div class="form-success" id="formSuccess">
+          報名成功！我們會在24小時內與你聯繫。
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     7. 常見問題（無圖片）
+     ============================================================ -->
+<section class="section section--tint">
+  <div class="container reveal">
+    <h2 class="section__title">常見問題</h2>
+
+    <div class="faq">
+      <details>
+        <summary>完全沒學過數學可以上嗎？</summary>
+        <p>可以。課程從最基礎的數序與量感開始，不需要任何先備知識。</p>
+      </details>
+      <details>
+        <summary>一堂課多長時間？</summary>
+        <p>每堂課約 50 分鐘，依孩子年齡與專注力適度調整。</p>
+      </details>
+      <details>
+        <summary>需要自備積木嗎？</summary>
+        <p>不需要，課程現場提供全套數棒積木與教具。</p>
+      </details>
+      <details>
+        <summary>家長可以陪同嗎？</summary>
+        <p>可以。我們鼓勵家長一起參與，回家也能延續操作樂趣。</p>
+      </details>
+    </div>
+  </div>
+</section>
+
+
+<!-- ============================================================
+     8. 頁尾
+     ★ 已移除電話與地址，只保留 Email 與社群連結
+     ★ 請把下面 Email 和社群網址替換成你自己的
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <p class="footer__brand">大妍藝術｜積木數學</p>
+
+    <ul class="footer__contact">
+      <li><a href="mailto:atc201807@gmail.com">✉️ atc201807@gmail.com</a></li>
+    </ul>
+
+    <ul class="footer__social">
+      <li><a href="https://www.facebook.com/ATC2018" target="_blank" rel="noopener">Facebook</a></li>
+	  <li><a href="https://www.instagram.com/yantalent_tw" target="_blank" rel="noopener">Instagram</a></li>
+	  <li><a href="https://line.me/R/ti/p/@yan313" target="_blank" rel="noopener">LINE</a></li>
+    </ul>
+
+    <p class="footer__copy">© 2026 大妍藝術. All rights reserved.</p>
+  </div>
+</footer>
+
+
+<!-- ============================================================
+     9. 固定底部按鈕
+     ============================================================ -->
+<div class="sticky-cta" id="stickyCta">
+  <a href="#signup" class="btn btn--primary">免費預約體驗課</a>
+</div>
+
+
+<script>
+document.documentElement.classList.add('js');
+
+/* 固定底部按鈕 */
+(function () {
+  const stickyCta = document.getElementById('stickyCta');
+  const hero = document.querySelector('.hero');
+  let ticking = false;
+
+  function update() {
+    const threshold = hero.offsetHeight * 0.7;
+    stickyCta.classList.toggle('is-visible', window.scrollY > threshold);
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', function () {
+    if (!ticking) {
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }, { passive: true });
+
+  window.addEventListener('resize', update, { passive: true });
+  update();
+})();
+
+/* 進場動畫 */
+(function () {
+  const items = document.querySelectorAll('.reveal');
+  if (!('IntersectionObserver' in window)) {
+    items.forEach(el => el.classList.add('is-in'));
+    return;
+  }
+  const io = new IntersectionObserver(function (entries) {
+    entries.forEach(function (entry) {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
+  items.forEach(el => io.observe(el));
+})();
+
+/* 表單送出
+   ------------------------------------------------------------
+   要真的收到報名資料，把 FORMSPREE_ENDPOINT 換成你的 Formspree 網址
+   ============================================================ */
+(function () {
+  const FORMSPREE_ENDPOINT = '';
+  const form = document.getElementById('signupForm');
+  const success = document.getElementById('formSuccess');
+
+  form.addEventListener('submit', async function (e) {
+    e.preventDefault();
+    if (!form.checkValidity()) { form.reportValidity(); return; }
+
+    const btn = form.querySelector('button[type="submit"]');
+    const originalText = btn.textContent;
+    btn.disabled = true;
+    btn.textContent = '送出中…';
+
+    try {
+      if (FORMSPREE_ENDPOINT) {
+        const res = await fetch(FORMSPREE_ENDPOINT, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { Accept: 'application/json' }
+        });
+        if (!res.ok) throw new Error('送出失敗');
+      }
+      success.classList.add('is-visible');
+      form.reset();
+      success.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    } catch (err) {
+      alert('送出失敗，請稍後再試。');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = originalText;
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
